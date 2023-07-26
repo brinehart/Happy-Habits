@@ -1,4 +1,4 @@
-# XO Behavior Tracker
+# Happy Habits Behavior Tracker
 --
 
 ### This repo is a WIP
