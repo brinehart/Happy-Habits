@@ -24,3 +24,29 @@
 @import '~@ionic/angular/css/text-alignment.css';
 @import '~@ionic/angular/css/text-transformation.css';
 @import '~@ionic/angular/css/flex-utils.css';
+
+@font-face {
+  font-family: 'Freckle Face';
+  src: url('./assets/fonts/FreckleFace-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Poppins';
+  src: url('./assets/fonts/Poppins-Medium.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+:root {
+  --ion-font-family: 'Freckle Face', sans-serif;
+}
+
+h4 h5, h6, p, a{
+  font-family: sans-serif;
+}
+
+.page-content {
+  margin: 5rem 1rem 5rem 1rem;
+}

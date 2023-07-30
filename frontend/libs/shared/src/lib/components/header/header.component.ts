@@ -56,15 +56,15 @@ export class HeaderComponent {
     map((urlRoot) => {
       switch (urlRoot) {
         case 'kids':
-          return '/assets/icons/tabs/kids/kids-64.svg';
+          return '/assets/icons/tabs/kids/kids-128.svg';
         case 'parents':
-          return '/assets/icons/tabs/parents/parents-64.svg';
+          return '/assets/icons/tabs/parents/parents-128.svg';
         case 'rewards':
-          return '/assets/icons/tabs/rewards/rewards-64.svg';
+          return '/assets/icons/tabs/rewards/rewards-128.svg';
         case 'consequences':
-          return '/assets/icons/tabs/consequences/consequences-64.svg';
+          return '/assets/icons/tabs/consequences/consequences-128.svg';
         default:
-          return '/assets/icons/tabs/kids/kids-64.svg';
+          return '/assets/icons/tabs/kids/kids-128.svg';
       }
     })
   );
