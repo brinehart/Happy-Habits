@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { TabsComponent } from "./tabs/tabs.component";
+import { HeaderComponent } from "@hh/shared";
 
 @Component({
     selector: 'hh-root',
@@ -9,7 +10,8 @@ import { TabsComponent } from "./tabs/tabs.component";
     standalone: true,
     imports: [
       IonicModule,
-      TabsComponent
+      TabsComponent,
+      HeaderComponent
     ],
 })
 export class AppComponent {

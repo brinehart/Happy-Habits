@@ -19,7 +19,8 @@
       "@hh/home": ["libs/home/src/index.ts"],
       "@hh/kids": ["libs/kids/src/index.ts"],
       "@hh/parents": ["libs/parents/src/index.ts"],
-      "@hh/rewards": ["libs/rewards/src/index.ts"]
+      "@hh/rewards": ["libs/rewards/src/index.ts"],
+      "@hh/shared": ["libs/shared/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
