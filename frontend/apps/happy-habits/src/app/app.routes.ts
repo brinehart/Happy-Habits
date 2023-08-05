@@ -1,5 +1,5 @@
 import { Route } from '@angular/router';
-import { TabsComponent } from "./tabs/tabs.component";
+import { TabsComponent } from './tabs/tabs.component';
 
 export const appRoutes: Route[] = [
   {
@@ -9,24 +9,27 @@ export const appRoutes: Route[] = [
       {
         path: '',
         pathMatch: 'full',
-        redirectTo: 'kids'
+        redirectTo: 'kids',
       },
       {
         path: 'kids',
-        loadComponent: () => import('@hh/kids').then(m => m.KidsComponent)
+        loadComponent: () => import('@hh/kids').then((m) => m.KidsComponent),
       },
       {
         path: 'parents',
-        loadComponent: () => import('@hh/parents').then(m => m.ParentsComponent)
+        loadComponent: () =>
+          import('@hh/parents').then((m) => m.ParentsPageComponent),
       },
       {
         path: 'rewards',
-        loadComponent: () => import('@hh/rewards').then(m => m.RewardsComponent)
+        loadComponent: () =>
+          import('@hh/rewards').then((m) => m.RewardsComponent),
       },
       {
         path: 'consequences',
-        loadComponent: () => import('@hh/consequences').then(m => m.ConsequencesComponent)
-      }
-    ]
+        loadComponent: () =>
+          import('@hh/consequences').then((m) => m.ConsequencesComponent),
+      },
+    ],
   },
 ];

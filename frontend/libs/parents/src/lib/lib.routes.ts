@@ -1,6 +1,6 @@
 import { Route } from '@angular/router';
-import { ParentsComponent } from './parents/parents.component';
+import { ParentsPageComponent } from './page/parents-page.component';
 
 export const parentsRoutes: Route[] = [
-  { path: '', component: ParentsComponent },
+  { path: '', component: ParentsPageComponent },
 ];

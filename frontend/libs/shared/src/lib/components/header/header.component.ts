@@ -18,7 +18,9 @@ export class HeaderComponent {
 
   private routeRoot$ = this.router.events.pipe(
     filter((event) => event instanceof NavigationEnd),
-    map(() => this.router.url),
+    map(() => {
+      return this.router.url;
+    }),
     map((url) => {
       switch (url) {
         case '/kids':
@@ -38,8 +40,6 @@ export class HeaderComponent {
   headerTitle$: Observable<string> = this.routeRoot$.pipe(
     map((urlRoot) => {
       switch (urlRoot) {
-        case 'kids':
-          return 'Kids';
         case 'parents':
           return 'Parents';
         case 'rewards':
@@ -55,8 +55,6 @@ export class HeaderComponent {
   headerIconSrc$: Observable<string> = this.routeRoot$.pipe(
     map((urlRoot) => {
       switch (urlRoot) {
-        case 'kids':
-          return '/assets/icons/tabs/kids/kids-128.svg';
         case 'parents':
           return '/assets/icons/tabs/parents/parents-128.svg';
         case 'rewards':

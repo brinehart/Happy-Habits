@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { TabsComponent } from './tabs/tabs.component';
-import { HeaderComponent } from '@hh/shared';
+import { DarkModeService, HeaderComponent } from '@hh/shared';
 
 @Component({
   selector: 'hh-root',
@@ -10,7 +10,11 @@ import { HeaderComponent } from '@hh/shared';
   standalone: true,
   imports: [IonicModule, TabsComponent, HeaderComponent],
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'Happy Habits';
-  constructor() {}
+  constructor(private darkModeService: DarkModeService) {}
+
+  async ngOnInit() {
+    await this.darkModeService.initDarkMode();
+  }
 }
