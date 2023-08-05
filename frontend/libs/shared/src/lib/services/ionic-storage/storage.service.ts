@@ -16,7 +16,7 @@ export class StorageService<T extends BaseEntity> {
   /**
    * Returns an entity from the specified table.
    * @param id - The id of the entity you want to return.
-   * @param table - The table to queried.
+   * @param table - The table to be queried.
    */
   async get<T extends BaseEntity>(
     id: ID,
@@ -93,7 +93,8 @@ export class StorageService<T extends BaseEntity> {
     const updatedEntities = existingEntities.filter(
       (entity) => entity.id !== id
     );
-    this.storage.set(table, updatedEntities);
+
+    await this.storage.set(table, updatedEntities);
   }
 
   /**
@@ -113,7 +114,7 @@ export class StorageService<T extends BaseEntity> {
       (entity) => !ids.some((id) => entity.id == id)
     );
 
-    this.storage.set(table, newEntities);
+    await this.storage.set(table, newEntities);
   }
 
   /**

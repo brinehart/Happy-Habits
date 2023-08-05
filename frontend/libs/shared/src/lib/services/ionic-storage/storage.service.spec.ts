@@ -47,6 +47,23 @@ describe('StorageService', () => {
     });
 
     describe('METHOD get', () => {
+      it(`WHEN called and entity is undefined THEN should return undefined`, async () => {
+        // GIVEN
+        const id = '0129540';
+        const fakeTaskEntryArray = [{ id: '12345' }, { id: '67890' }];
+        storageSpy.get.mockResolvedValue(fakeTaskEntryArray);
+
+        // WHEN
+        const result = await service.get(id, DatabaseTableTypes.Settings);
+
+        // THEN
+        expect(service.init).toBeCalled();
+        expect(storageSpy.get).toHaveBeenCalledWith(
+          DatabaseTableTypes.Settings
+        );
+        expect(result).toBeUndefined();
+      });
+
       it(`WHEN called with valid table and id that is in table THEN return entity with the same id `, async () => {
         // GIVEN
         const id = '12345';
