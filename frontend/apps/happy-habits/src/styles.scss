@@ -39,14 +39,40 @@
   font-style: normal;
 }
 
+@font-face {
+  font-family: 'Averia Serif';
+  src: url('./assets/fonts/AveriaSerifLibre-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Nunito';
+  src: url('./assets/fonts/Nunito-VariableFont_wght.ttf')
+    format('truetype-variations');
+  font-weight: 1 999;
+}
+
 :root {
-  --ion-font-family: 'Freckle Face', sans-serif;
+  --ion-font-family: 'Poppins', sans-serif;
 }
 
-h4 h5, h6, p, a{
-  font-family: sans-serif;
+h1,
+h2 {
+  font-weight: 1000;
 }
 
-.page-content {
-  margin: 5rem 1rem 2rem 1rem;
+h4,
+h5,
+h6 {
+  font-family: 'Averia Serif', sans-serif;
+}
+
+ion-content {
+  --padding-top: 4rem !important;
+}
+
+.ion-text-uppercase {
+  font-family: 'Nunito' !important;
+  font-weight: 1000 !important;
 }

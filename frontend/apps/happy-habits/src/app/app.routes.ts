@@ -13,12 +13,12 @@ export const appRoutes: Route[] = [
       },
       {
         path: 'kids',
-        loadComponent: () => import('@hh/kids').then((m) => m.KidsComponent),
+        loadChildren: () => import('@hh/kids').then((m) => m.kidsRoutes),
       },
       {
         path: 'parents',
-        loadComponent: () =>
-          import('@hh/parents').then((m) => m.ParentsPageComponent),
+        loadChildren: () =>
+          import('@hh/parents').then((m) => m.parentsRoutes),
       },
       {
         path: 'rewards',

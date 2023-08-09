@@ -1,1 +1,2 @@
-export * from './lib/kids/kids.component';
+export * from './lib/components';
+export * from './lib/lib.routes';

@@ -29,7 +29,10 @@
             "input": "apps/happy-habits/src/theme/variables.scss"
           }
         ],
-        "scripts": []
+        "scripts": [],
+        "allowedCommonJsDependencies": [
+          "localforage",
+        ]
       },
       "configurations": {
         "production": {

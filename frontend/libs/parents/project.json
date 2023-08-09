@@ -2,7 +2,7 @@
   "name": "parents",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/parents/src",
-  "prefix": "hh-home",
+  "prefix": "hh-parents",
   "tags": ["home"],
   "projectType": "library",
   "targets": {
