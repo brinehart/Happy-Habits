@@ -3,4 +3,5 @@ export interface Kid {
   name: string;
   birthday: Date;
   age: number;
+  image?: string;
 }

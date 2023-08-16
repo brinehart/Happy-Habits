@@ -6,6 +6,9 @@ export const selectAllKids = createSelector(
   (kids) => kids,
 );
 
+export const selectKidById = (id: string) =>
+  createSelector(selectAllKids, (kids) => kids.find((kid) => kid.id === id));
+
 export const selectCurrentKid = createSelector(
   kidsFeature.selectKidsState,
   kidsFeature.selectAll,

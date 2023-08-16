@@ -25,14 +25,10 @@
         ],
         "styles": [
           "apps/happy-habits/src/styles.scss",
-          {
-            "input": "apps/happy-habits/src/theme/variables.scss"
-          }
+          "apps/happy-habits/src/theme/variables.scss"
         ],
         "scripts": [],
-        "allowedCommonJsDependencies": [
-          "localforage",
-        ]
+        "allowedCommonJsDependencies": ["localforage"]
       },
       "configurations": {
         "production": {

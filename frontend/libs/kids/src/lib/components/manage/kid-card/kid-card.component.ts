@@ -1,4 +1,5 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnDestroy } from '@angular/core';
+import { Router } from '@angular/router';
 import { Kid } from '@hh/shared';
 import { IonicModule } from '@ionic/angular';
 
@@ -16,4 +17,10 @@ export class KidCardComponent {
     birthday: new Date('2011-07-18'),
     age: 12,
   };
+
+  constructor(private router: Router) {}
+
+  async editKid() {
+    await this.router.navigate(['/manage-kids/edit', this.kid?.id]);
+  }
 }
