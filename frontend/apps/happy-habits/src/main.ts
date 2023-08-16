@@ -6,13 +6,9 @@ import { IonicRouteStrategy, IonicModule } from '@ionic/angular';
 import { IonicStorageModule } from '@ionic/storage-angular';
 import { Drivers } from '@ionic/storage';
 import { appRoutes } from './app/app.routes';
-import { StoreModule, provideStore } from '@ngrx/store';
-import { EffectsModule, provideEffects } from '@ngrx/effects';
-import {
-  StoreDevtools,
-  StoreDevtoolsModule,
-  provideStoreDevtools,
-} from '@ngrx/store-devtools';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import {
   ActivityEffects,
   KidEffects,
@@ -33,7 +29,7 @@ bootstrapApplication(AppComponent, {
       StoreModule.forFeature(outcomesFeature),
       IonicModule.forRoot(),
       IonicStorageModule.forRoot({
-        name: '__drasiDb',
+        name: '__hhDb',
         driverOrder: [Drivers.IndexedDB, Drivers.LocalStorage],
       }),
       EffectsModule.forRoot([
