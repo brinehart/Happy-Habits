@@ -1,12 +1,13 @@
-import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { kidsFeatureKey, KidState } from '../reducers/kid.reducer';
-import * as fromKid from '../reducers/kid.reducer';
+import { createSelector } from '@ngrx/store';
+import { kidsFeature } from '../reducers/kid.reducer';
 
-export const selectKidState = createFeatureSelector<KidState>(kidsFeatureKey);
-
-export const selectAllKids = createSelector(selectKidState, fromKid.selectAll);
+export const selectAllKids = createSelector(
+  kidsFeature.selectAll,
+  (kids) => kids,
+);
 
 export const selectCurrentKid = createSelector(
-  selectKidState,
-  fromKid.selectCurrentKid
+  kidsFeature.selectKidsState,
+  kidsFeature.selectAll,
+  (state, kids) => kids.find((kid) => kid.id === state.selectedKidId),
 );

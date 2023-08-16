@@ -16,9 +16,12 @@ export const appRoutes: Route[] = [
         loadChildren: () => import('@hh/kids').then((m) => m.kidsRoutes),
       },
       {
+        path: 'manage-kids',
+        loadChildren: () => import('@hh/kids').then((m) => m.manageKidRoutes),
+      },
+      {
         path: 'parents',
-        loadChildren: () =>
-          import('@hh/parents').then((m) => m.parentsRoutes),
+        loadChildren: () => import('@hh/parents').then((m) => m.parentsRoutes),
       },
       {
         path: 'rewards',

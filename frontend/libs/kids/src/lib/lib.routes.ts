@@ -2,25 +2,15 @@ import { Route } from '@angular/router';
 import {
   KidsPageComponent,
   ListKidsComponent,
+  ManageKidFormComponent,
   ManageKidsComponent,
 } from './components';
 
 export const KIDS_ROUTER_NAME = 'kids';
 
-export const kidsRoutes: Route[] = [
+export const manageKidRoutes: Route[] = [
   {
     path: '',
-    component: KidsPageComponent,
-    children: [
-      {
-        path: '',
-        component: ListKidsComponent,
-        outlet: KIDS_ROUTER_NAME,
-      },
-    ],
-  },
-  {
-    path: 'manage',
     component: KidsPageComponent,
     children: [
       {
@@ -36,11 +26,11 @@ export const kidsRoutes: Route[] = [
     children: [
       {
         path: '',
-        component: ManageKidsComponent,
+        component: ManageKidFormComponent,
+        outlet: KIDS_ROUTER_NAME,
         data: {
           mode: 'add',
         },
-        outlet: KIDS_ROUTER_NAME,
       },
     ],
   },
@@ -50,10 +40,24 @@ export const kidsRoutes: Route[] = [
     children: [
       {
         path: '',
-        component: ManageKidsComponent,
+        component: ManageKidFormComponent,
+        outlet: KIDS_ROUTER_NAME,
         data: {
           mode: 'edit',
         },
+      },
+    ],
+  },
+];
+
+export const kidsRoutes: Route[] = [
+  {
+    path: '',
+    component: KidsPageComponent,
+    children: [
+      {
+        path: '',
+        component: ListKidsComponent,
         outlet: KIDS_ROUTER_NAME,
       },
     ],

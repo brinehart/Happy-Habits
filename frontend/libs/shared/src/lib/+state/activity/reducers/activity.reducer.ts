@@ -15,44 +15,42 @@ export const initialState: ActivityState = adapter.getInitialState({
   selectedActivity: null,
 });
 
-export const activityReducer = createReducer(
-  initialState,
-  on(ActivityActions.addActivity, (state, action) =>
-    adapter.addOne(action.activity, state)
-  ),
-  on(ActivityActions.upsertActivity, (state, action) =>
-    adapter.upsertOne(action.activity, state)
-  ),
-  on(ActivityActions.addActivities, (state, action) =>
-    adapter.addMany(action.activities, state)
-  ),
-  on(ActivityActions.upsertActivities, (state, action) =>
-    adapter.upsertMany(action.activities, state)
-  ),
-  on(ActivityActions.updateActivity, (state, action) =>
-    adapter.updateOne(action.activity, state)
-  ),
-  on(ActivityActions.updateActivities, (state, action) =>
-    adapter.updateMany(action.activities, state)
-  ),
-  on(ActivityActions.deleteActivity, (state, action) =>
-    adapter.removeOne(action.id, state)
-  ),
-  on(ActivityActions.deleteActivities, (state, action) =>
-    adapter.removeMany(action.ids, state)
-  ),
-  on(ActivityActions.loadActivities, (state, action) =>
-    adapter.setAll(action.activities, state)
-  ),
-  on(ActivityActions.clearActivities, (state) => adapter.removeAll(state)),
-  on(ActivityActions.setCurrentActivity, (state, { activity }) => {
-    return { ...state, selectedActivity: activity };
-  })
-);
-
 export const activitiesFeature = createFeature({
   name: activitiesFeatureKey,
-  reducer: activityReducer,
+  reducer: createReducer(
+    initialState,
+    on(ActivityActions.addActivity, (state, action) =>
+      adapter.addOne(action.activity, state),
+    ),
+    on(ActivityActions.upsertActivity, (state, action) =>
+      adapter.upsertOne(action.activity, state),
+    ),
+    on(ActivityActions.addActivities, (state, action) =>
+      adapter.addMany(action.activities, state),
+    ),
+    on(ActivityActions.upsertActivities, (state, action) =>
+      adapter.upsertMany(action.activities, state),
+    ),
+    on(ActivityActions.updateActivity, (state, action) =>
+      adapter.updateOne(action.activity, state),
+    ),
+    on(ActivityActions.updateActivities, (state, action) =>
+      adapter.updateMany(action.activities, state),
+    ),
+    on(ActivityActions.deleteActivity, (state, action) =>
+      adapter.removeOne(action.id, state),
+    ),
+    on(ActivityActions.deleteActivities, (state, action) =>
+      adapter.removeMany(action.ids, state),
+    ),
+    on(ActivityActions.loadActivities, (state, action) =>
+      adapter.setAll(action.activities, state),
+    ),
+    on(ActivityActions.clearActivities, (state) => adapter.removeAll(state)),
+    on(ActivityActions.setCurrentActivity, (state, { activity }) => {
+      return { ...state, selectedActivity: activity };
+    }),
+  ),
   extraSelectors: ({ selectActivitiesState }) => ({
     ...adapter.getSelectors(selectActivitiesState),
   }),

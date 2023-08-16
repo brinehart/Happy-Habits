@@ -6,7 +6,9 @@ import { Kid } from '../kid.model';
 export const KidActions = createActionGroup({
   source: 'Kid/API',
   events: {
+    'Load Kids Start': emptyProps(),
     'Load Kids': props<{ kids: Kid[] }>(),
+    'Load Kids Failure': props<{ error: any }>(),
     'Add Kid': props<{ kid: Kid }>(),
     'Upsert Kid': props<{ kid: Kid }>(),
     'Add Kids': props<{ kids: Kid[] }>(),

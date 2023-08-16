@@ -32,9 +32,9 @@ export class HeaderComponent {
         case '/consequences':
           return 'consequences';
         default:
-          return 'kids';
+          return 'manage';
       }
-    })
+    }),
   );
 
   headerTitle$: Observable<string> = this.routeRoot$.pipe(
@@ -47,9 +47,9 @@ export class HeaderComponent {
         case 'consequences':
           return 'Consequences';
         default:
-          return 'Kids';
+          return 'Management';
       }
-    })
+    }),
   );
 
   headerIconSrc$: Observable<string> = this.routeRoot$.pipe(
@@ -64,6 +64,6 @@ export class HeaderComponent {
         default:
           return '/assets/icons/tabs/kids/kids-128.svg';
       }
-    })
+    }),
   );
 }

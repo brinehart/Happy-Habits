@@ -69,7 +69,22 @@ h6 {
 }
 
 ion-content {
-  --padding-top: 4rem !important;
+  --padding-top: 3rem;
+}
+
+.ion-page:not(hh-kids-manage) {
+  justify-content: flex-start;
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p,
+  div,
+  section {
+    padding: 0 1rem;
+  }
 }
 
 .ion-text-uppercase {

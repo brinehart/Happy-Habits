@@ -6,45 +6,54 @@ import { IonicRouteStrategy, IonicModule } from '@ionic/angular';
 import { IonicStorageModule } from '@ionic/storage-angular';
 import { Drivers } from '@ionic/storage';
 import { appRoutes } from './app/app.routes';
-import { provideStore } from '@ngrx/store';
-import { provideEffects } from '@ngrx/effects';
-import { provideStoreDevtools } from '@ngrx/store-devtools';
+import { StoreModule, provideStore } from '@ngrx/store';
+import { EffectsModule, provideEffects } from '@ngrx/effects';
+import {
+  StoreDevtools,
+  StoreDevtoolsModule,
+  provideStoreDevtools,
+} from '@ngrx/store-devtools';
 import {
   ActivityEffects,
-  activityReducer,
   KidEffects,
-  kidReducer,
   OutcomeEffects,
-  outcomeReducer,
+  kidsFeature,
+  outcomesFeature,
+  activitiesFeature,
+  RouterEffects,
 } from '@hh/shared';
 
 bootstrapApplication(AppComponent, {
   providers: [
-    provideStoreDevtools({ logOnly: !isDevMode() }),
-    provideEffects(),
-    provideStore({
-      activity: activityReducer,
-      outcome: outcomeReducer,
-      kid: kidReducer,
-    }),
-    provideStoreDevtools({
-      maxAge: 35,
-      logOnly: false,
-      autoPause: true,
-      features: {
-        pause: false,
-        lock: true,
-        persist: true,
-      },
-    }),
-    provideEffects([ActivityEffects, KidEffects, OutcomeEffects]),
     importProvidersFrom(
       BrowserModule,
+      StoreModule.forRoot({}),
+      StoreModule.forFeature(kidsFeature),
+      StoreModule.forFeature(activitiesFeature),
+      StoreModule.forFeature(outcomesFeature),
       IonicModule.forRoot(),
       IonicStorageModule.forRoot({
         name: '__drasiDb',
         driverOrder: [Drivers.IndexedDB, Drivers.LocalStorage],
-      })
+      }),
+      EffectsModule.forRoot([
+        RouterEffects,
+        KidEffects,
+        ActivityEffects,
+        OutcomeEffects,
+      ]),
+      isDevMode()
+        ? StoreDevtoolsModule.instrument({
+            maxAge: 35,
+            logOnly: false,
+            autoPause: true,
+            features: {
+              pause: false,
+              lock: true,
+              persist: true,
+            },
+          })
+        : [],
     ),
     provideRouter(appRoutes),
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
