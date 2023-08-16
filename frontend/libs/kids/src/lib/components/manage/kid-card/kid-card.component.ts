@@ -15,8 +15,16 @@ export class KidCardComponent {
     id: '12345',
     name: 'John Doe',
     birthday: new Date('2011-07-18'),
-    age: 12,
   };
+
+  get age(): number {
+    if (!this.kid?.birthday) {
+      return 0;
+    }
+    const diff = Date.now() - new Date(this.kid.birthday).getTime();
+    const age = Math.floor(diff / 31557600000);
+    return age;
+  }
 
   constructor(private router: Router) {}
 

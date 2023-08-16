@@ -103,7 +103,7 @@ export class ManageKidFormComponent implements OnInit, OnDestroy {
       id: this.manageKidForm.get('id')?.value ?? uuid(),
       name: this.manageKidForm.get('name')?.value ?? '',
       birthday: this.manageKidForm.get('birthday')?.value ?? new Date(),
-      age: this.manageKidForm.get('age')?.value ?? 0,
+      image: this.manageKidForm.get('image')?.value ?? undefined,
     };
   }
 }

@@ -28,6 +28,18 @@ export class KidEffects {
     ),
   );
 
+  upsertKids$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(KidActions.upsertKid),
+      concatMap(({ kid }) =>
+        from(this.storageService.upsertOne(kid, 'kids')).pipe(
+          map(() => KidActions.upsertKidSuccess({ id: kid.id })),
+          catchError((error) => of(KidActions.upsertKidFailure({ error }))),
+        ),
+      ),
+    ),
+  );
+
   constructor(
     private actions$: Actions,
     private storageService: StorageService<Kid>,

@@ -11,6 +11,8 @@ export const KidActions = createActionGroup({
     'Load Kids Failure': props<{ error: any }>(),
     'Add Kid': props<{ kid: Kid }>(),
     'Upsert Kid': props<{ kid: Kid }>(),
+    'Upsert Kid Success': props<{ id: string }>(),
+    'Upsert Kid Failure': props<{ error: any }>(),
     'Add Kids': props<{ kids: Kid[] }>(),
     'Upsert Kids': props<{ kids: Kid[] }>(),
     'Update Kid': props<{ kid: Update<Kid> }>(),
