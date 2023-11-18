@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { Kid } from '@hh/shared';
 import { IonicModule } from '@ionic/angular';
@@ -22,8 +22,7 @@ export class KidCardComponent {
       return 0;
     }
     const diff = Date.now() - new Date(this.kid.birthday).getTime();
-    const age = Math.floor(diff / 31557600000);
-    return age;
+    return Math.floor(diff / 31557600000);
   }
 
   constructor(private router: Router) {}
