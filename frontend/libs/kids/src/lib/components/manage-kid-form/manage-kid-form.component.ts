@@ -12,22 +12,25 @@ import { Kid, KidService } from '@hh/shared';
 import { v4 as uuid } from 'uuid';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, filter, map, switchMap, take, tap } from 'rxjs';
+import { KidAvatarSelectComponent } from "../manage/kid-avatar-select/kid-avatar-select.component";
+import { Avatar } from "../../models";
 
 @Component({
   selector: 'hh-kids-manage-form',
   standalone: true,
-  imports: [CommonModule, IonicModule, ReactiveFormsModule, FormsModule],
+  imports: [CommonModule, IonicModule, ReactiveFormsModule, FormsModule, KidAvatarSelectComponent],
   templateUrl: './manage-kid-form.component.html',
   styleUrls: ['./manage-kid-form.component.scss'],
 })
 export class ManageKidFormComponent implements OnInit, OnDestroy {
   @ViewChild(IonModal) modal!: IonModal;
+  selectedGender: 'Boy' | 'Girl' = 'Boy';
 
   manageKidForm = new FormGroup({
     id: new FormControl<string | undefined>(undefined),
     name: new FormControl<string | null>(null, [Validators.required]),
     birthday: new FormControl<Date | null>(null, [Validators.required]),
-    image: new FormControl<string | null>(null),
+    avatar: new FormControl<Avatar | undefined>(undefined),
   });
 
   mode$: Observable<'Edit' | 'New'> = this.route.data.pipe(
@@ -68,14 +71,14 @@ export class ManageKidFormComponent implements OnInit, OnDestroy {
                     this.router.navigate(['/manage-kids/add']).then();
                   }
                 }),
-                filter((kid) => kid !== undefined),
+                filter((kid): kid is Kid => kid !== undefined),
                 take(1),
                 tap((kid) => {
                   this.manageKidForm.patchValue({
                     id: kid?.id ?? null,
                     name: kid?.name ?? null,
                     birthday: kid?.birthday ?? null,
-                    image: kid?.image ?? null,
+                    avatar: kid?.avatar ?? null,
                   });
                 }),
               ),
@@ -103,7 +106,11 @@ export class ManageKidFormComponent implements OnInit, OnDestroy {
       id: this.manageKidForm.get('id')?.value ?? uuid(),
       name: this.manageKidForm.get('name')?.value ?? '',
       birthday: this.manageKidForm.get('birthday')?.value ?? new Date(),
-      image: this.manageKidForm.get('image')?.value ?? undefined,
+      avatar: this.manageKidForm.get('avatar')?.value ?? undefined,
     };
+  }
+
+  toggleGender() {
+    this.selectedGender = this.selectedGender === 'Boy' ? 'Girl' : 'Boy';
   }
 }
