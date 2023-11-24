@@ -3,7 +3,6 @@ import {
   Component, computed,
   CUSTOM_ELEMENTS_SCHEMA, effect,
   ElementRef,
-  forwardRef,
   Input,
   signal,
   ViewChild
@@ -11,8 +10,7 @@ import {
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { register } from 'swiper/element/bundle';
 import { IonicModule } from "@ionic/angular";
-import { CustomControlAccessor } from "./custom-control.accessor";
-import { NG_VALUE_ACCESSOR } from "@angular/forms";
+import { ValueAccessorDirective } from "./custom-control.accessor";
 import { takeUntilDestroyed, toObservable } from "@angular/core/rxjs-interop";
 import { distinctUntilChanged, tap } from "rxjs/operators";
 import { filter } from "rxjs";
@@ -26,16 +24,20 @@ register();
   imports: [CommonModule, IonicModule, NgOptimizedImage],
   templateUrl: './kid-avatar-select.component.html',
   styleUrls: ['./kid-avatar-select.component.scss'],
-  providers: [{
-    provide: NG_VALUE_ACCESSOR,
-    useExisting: forwardRef(() => KidAvatarSelectComponent),
-    multi: true,
-  },],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  hostDirectives: [ValueAccessorDirective],
 })
-export class KidAvatarSelectComponent extends CustomControlAccessor implements AfterViewInit {
-  @Input() set selectedGender(selectedGender: Gender) {
-    this.$selectedGender.set(selectedGender);
+export class KidAvatarSelectComponent implements AfterViewInit {
+  @Input() set selectedGender(selectedGender: Gender | undefined) {
+    this.$selectedGender.set(selectedGender ?? 'Boy');
+  }
+
+  @Input() set selectedIndex(selectedIndex: number | undefined) {
+    this.$selectedIndex.set(selectedIndex ?? 0);
+    const swiperEl = document.querySelector('swiper-container');
+    if(swiperEl != undefined) {
+      swiperEl.swiper.slideTo(selectedIndex ?? 0);
+    }
   }
 
   $selectedGender = signal<Gender>('Boy')
@@ -46,8 +48,8 @@ export class KidAvatarSelectComponent extends CustomControlAccessor implements A
       this.girlAvatars[this.$selectedIndex()]
   );
   $avatarChanged = effect(() => {
-    this.onChange(this.$selectedAvatar());
-    this.onTouch();
+    this.valueAccessor.valueChange(this.$selectedAvatar());
+    this.valueAccessor.touchedChange(true);
   });
 
   boyAvatars: Avatar[] = [...Array(25).keys()].map((index) => ({
@@ -67,9 +69,7 @@ export class KidAvatarSelectComponent extends CustomControlAccessor implements A
   @ViewChild('avatarSwiper', { static: false })
   swiperRef: ElementRef | undefined;
 
-  constructor() {
-    super();
-
+  constructor(public valueAccessor: ValueAccessorDirective<Avatar>) {
     toObservable(this.$selectedGender).pipe(
       filter((selectedGender): selectedGender is Gender => !!selectedGender),
       distinctUntilChanged(),
@@ -81,10 +81,6 @@ export class KidAvatarSelectComponent extends CustomControlAccessor implements A
       }),
       takeUntilDestroyed()
     ).subscribe();
-  }
-
-  get value(): Avatar {
-    return this.$selectedAvatar();
   }
 
   ngAfterViewInit(): void {
@@ -100,4 +96,6 @@ export class KidAvatarSelectComponent extends CustomControlAccessor implements A
   setIndex(selectedIndex: number) {
     this.$selectedIndex.set(selectedIndex);
   }
+
+  avatarSrc = (avatar: Avatar) => `assets/avatars/${avatar.gender.toLowerCase()}s/${avatar.src}`;
 }

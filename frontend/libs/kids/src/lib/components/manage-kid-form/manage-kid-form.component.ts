@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, signal, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonModal, IonicModule } from '@ionic/angular';
 import {
@@ -13,7 +13,7 @@ import { v4 as uuid } from 'uuid';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, filter, map, switchMap, take, tap } from 'rxjs';
 import { KidAvatarSelectComponent } from "../manage/kid-avatar-select/kid-avatar-select.component";
-import { Avatar } from "../../models";
+import { Avatar, Gender } from "../../models";
 
 @Component({
   selector: 'hh-kids-manage-form',
@@ -24,12 +24,14 @@ import { Avatar } from "../../models";
 })
 export class ManageKidFormComponent implements OnInit, OnDestroy {
   @ViewChild(IonModal) modal!: IonModal;
-  selectedGender: 'Boy' | 'Girl' = 'Boy';
+  selectedGender: Gender | undefined = 'Boy';
+  selectedIndex: number | undefined;
 
   manageKidForm = new FormGroup({
     id: new FormControl<string | undefined>(undefined),
     name: new FormControl<string | null>(null, [Validators.required]),
-    birthday: new FormControl<Date | null>(null, [Validators.required]),
+    birthday: new FormControl<string | null>(null, [Validators.required]),
+    birthdayPresentation: new FormControl<string | null>(null),
     avatar: new FormControl<Avatar | undefined>(undefined),
   });
 
@@ -74,10 +76,13 @@ export class ManageKidFormComponent implements OnInit, OnDestroy {
                 filter((kid): kid is Kid => kid !== undefined),
                 take(1),
                 tap((kid) => {
-                  this.manageKidForm.patchValue({
+                  this.selectedGender = kid?.avatar?.gender;
+                  this.selectedIndex = kid?.avatar?.index;
+                  this.manageKidForm.setValue({
                     id: kid?.id ?? null,
                     name: kid?.name ?? null,
-                    birthday: kid?.birthday ?? null,
+                    birthday: new Date(kid?.birthday).toISOString() ?? null,
+                    birthdayPresentation: new Date(kid?.birthday).toISOString().split('T')[0] ?? null,
                     avatar: kid?.avatar ?? null,
                   });
                 }),
@@ -105,12 +110,30 @@ export class ManageKidFormComponent implements OnInit, OnDestroy {
     return {
       id: this.manageKidForm.get('id')?.value ?? uuid(),
       name: this.manageKidForm.get('name')?.value ?? '',
-      birthday: this.manageKidForm.get('birthday')?.value ?? new Date(),
+      birthday: new Date(this.manageKidForm.get('birthday')?.value ?? '') ?? new Date(),
       avatar: this.manageKidForm.get('avatar')?.value ?? undefined,
     };
   }
 
   toggleGender() {
     this.selectedGender = this.selectedGender === 'Boy' ? 'Girl' : 'Boy';
+  }
+
+  toggleBirthdayModal(isOpen: boolean) {
+    this.birthdayModalOpen.set(isOpen);
+  }
+
+  setBirthdayPresentation() {
+    this.manageKidForm.get('birthdayPresentation')?.setValue(
+      this.manageKidForm.get('birthday')?.value?.split('T')[0] ?? null);
+  }
+
+  birthdayModalOpen = signal<boolean>(false);
+
+  async deleteKid() {
+    const id = this.manageKidForm.get('id')?.value;
+    if(id == undefined) return;
+    this.kidService.deleteKid(id);
+    await this.router.navigate(['/manage-kids']);
   }
 }

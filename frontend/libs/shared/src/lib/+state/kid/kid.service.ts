@@ -17,27 +17,11 @@ export class KidService {
 
   loadKids = () => this.store.dispatch(KidActions.loadKidsStart());
 
-  addKid(kid: Kid) {
-    this.store.dispatch(KidActions.addKid({ kid }));
-  }
-
-  addKids(kids: Kid[]) {
-    this.store.dispatch(KidActions.addKids({ kids }));
-  }
-
   upsertKid(kid: Kid) {
     this.store.dispatch(KidActions.upsertKid({ kid }));
   }
 
-  upsertKids(kids: Kid[]) {
-    this.store.dispatch(KidActions.upsertKids({ kids }));
-  }
-
   deleteKid(id: string) {
     this.store.dispatch(KidActions.deleteKid({ id }));
-  }
-
-  deleteKids(ids: string[]) {
-    this.store.dispatch(KidActions.deleteKids({ ids }));
   }
 }

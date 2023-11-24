@@ -38,9 +38,6 @@ export const kidsFeature = createFeature({
     on(KidActions.deleteKid, (state, action) =>
       adapter.removeOne(action.id, state),
     ),
-    on(KidActions.deleteKids, (state, action) =>
-      adapter.removeMany(action.ids, state),
-    ),
     on(KidActions.loadKids, (state, action) =>
       adapter.setAll(action.kids, state),
     ),

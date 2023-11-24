@@ -1,19 +1,12 @@
 <swiper-container #avatarSwiper>
-  <ng-container *ngIf="$selectedGender() === 'Boy'; else girlSlides">
-    <swiper-slide *ngFor="let avatar of boyAvatars">
-      <ion-img
-        [alt]="avatar.alt"
-        src="assets/avatars/boys/{{avatar.src}}">
-      </ion-img>
+    <swiper-slide *ngFor="let avatar of ($selectedGender() === 'Boy') ? boyAvatars : girlAvatars">
+      <div class="avatar-slide-wrapper">
+        <img
+            [alt]="avatar.alt"
+            [ngSrc]="avatarSrc(avatar)"
+            height="200"
+            width="200"
+          />
+      </div>
     </swiper-slide>
-  </ng-container>
-
-  <ng-template #girlSlides>
-    <swiper-slide *ngFor="let avatar of girlAvatars">
-      <ion-img
-        [alt]="avatar.alt"
-        src="assets/avatars/girls/{{avatar.src}}">
-      </ion-img>
-    </swiper-slide>
-  </ng-template>
 </swiper-container>

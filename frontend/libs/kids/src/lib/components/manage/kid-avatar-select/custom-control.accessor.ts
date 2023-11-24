@@ -1,18 +1,37 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import { ControlValueAccessor, FormControl } from '@angular/forms';
+import { Directive, forwardRef, signal } from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
-export class CustomControlAccessor implements ControlValueAccessor {
-  onChange: any = () => {};
-  onTouch: any = () => {};
+@Directive({
+  selector: '[hhValueAccessor]',
+  standalone: true,
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => ValueAccessorDirective),
+      multi: true,
+    },
+  ],
+})
+export class ValueAccessorDirective<T> implements ControlValueAccessor {
+  private onChange: any = () => {};
+  private onTouched: any = () => {};
+  private $value = signal<T | undefined>(undefined);
+  private $disabled = signal<boolean>(false);
+  readonly value = this.$value.asReadonly();
+  readonly disabled = this.$disabled.asReadonly();
 
-  disabled = false;
+  constructor() {}
 
-  selectInputControl = new FormControl<string | null>(null);
+  valueChange(v: T) {
+    this.onChange(v);
+  }
+
+  touchedChange(v: boolean) {
+    this.onTouched(v);
+  }
 
   writeValue(obj: any): void {
-    if (obj) {
-      this.onChange(obj);
-    }
+    this.$value.set(obj);
   }
 
   registerOnChange(fn: any): void {
@@ -20,10 +39,10 @@ export class CustomControlAccessor implements ControlValueAccessor {
   }
 
   registerOnTouched(fn: any): void {
-    this.onTouch = fn;
+    this.onTouched = fn;
   }
 
-  setDisabledState(isDisabled: boolean) {
-    this.disabled = isDisabled;
+  setDisabledState(isDisabled: boolean): void {
+    this.$disabled.set(isDisabled);
   }
 }

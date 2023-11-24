@@ -40,6 +40,18 @@ export class KidEffects {
     ),
   );
 
+  deleteKid$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(KidActions.deleteKid),
+      concatMap(({ id }) =>
+        from(this.storageService.deleteOne(id, 'kids')).pipe(
+          map(() => KidActions.deleteKidSuccess({ id })),
+          catchError((error) => of(KidActions.deleteKidFailure({ error }))),
+        ),
+      ),
+    ),
+  );
+
   constructor(
     private actions$: Actions,
     private storageService: StorageService<Kid>,
