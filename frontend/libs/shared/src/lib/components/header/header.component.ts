@@ -47,7 +47,7 @@ export class HeaderComponent {
         case 'consequences':
           return 'Consequences';
         default:
-          return 'Management';
+          return 'Happy Habits';
       }
     }),
   );
