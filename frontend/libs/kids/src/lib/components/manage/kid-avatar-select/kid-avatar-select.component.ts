@@ -10,7 +10,7 @@ import {
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { register } from 'swiper/element/bundle';
 import { IonicModule } from "@ionic/angular";
-import { ValueAccessorDirective } from "./custom-control.accessor";
+import { ValueAccessorDirective } from "../../custom-control.accessor";
 import { takeUntilDestroyed, toObservable } from "@angular/core/rxjs-interop";
 import { distinctUntilChanged, tap } from "rxjs/operators";
 import { filter } from "rxjs";
