@@ -1,0 +1,15 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-icon size="large" [src]="headerIconSrc$ | async" aria-hidden="true"></ion-icon>
+    </ion-buttons>
+    <ion-title class="ion-text-uppercase">
+      {{ headerTitle$ | async }}
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-avatar>
+        <img class="header-avatar-img" alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+      </ion-avatar>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>

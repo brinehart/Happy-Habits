@@ -1,0 +1,52 @@
+<form [formGroup]="manageKidForm" (ngSubmit)="onSubmit()">
+  <div class="header">
+    <h1>{{ mode$ | async }} Kid</h1>
+    <ion-toggle [checked]="selectedGender === 'Girl'" (ionChange)="toggleGender()">
+      <ion-icon slot="start" name="sunny"></ion-icon>
+      <ion-label>{{selectedGender}}</ion-label>
+    </ion-toggle>
+  </div>
+  <div class="avatar-select">
+    <hh-kids-kid-avatar-select formControlName="avatar" [selectedGender]="selectedGender" [selectedIndex]="selectedIndex"></hh-kids-kid-avatar-select>
+  </div>
+  <input type="hidden" formControlName="id" />
+  <ion-input
+    class="name-input"
+    type="text"
+    mode="md"
+    label="Name"
+    label-placement="floating"
+    fill="outline"
+    formControlName="name"
+    placeholder="Enter Name"
+  ></ion-input>
+  <ion-input
+    type="date"
+    mode="md"
+    label="Birthday"
+    label-placement="floating"
+    fill="outline"
+    formControlName="birthdayPresentation"
+    placeholder="Enter Birthday"
+    (ionFocus)="toggleBirthdayModal(true)"
+  ></ion-input>
+  <ion-datetime-button #dateSelectTrigger datetime="datetime"></ion-datetime-button>
+  <ion-modal [keepContentsMounted]="true" [isOpen]="birthdayModalOpen()" (ionModalDidDismiss)="toggleBirthdayModal(false)">
+    <ng-template>
+      <ion-datetime
+        id="datetime"
+        presentation="date"
+        [preferWheel]="true"
+        formControlName="birthday"
+        (ionChange)="setBirthdayPresentation()"
+        [showDefaultButtons]="true"
+      ></ion-datetime>
+    </ng-template>
+  </ion-modal>
+  <ion-button type="submit" [disabled]="!manageKidForm.valid">
+    Submit
+  </ion-button>
+  <ion-button type="button" color="danger" (click)="deleteKid()" *ngIf="(mode$ | async) === 'Edit'">
+    Delete
+  </ion-button>
+</form>
