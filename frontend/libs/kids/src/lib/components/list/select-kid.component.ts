@@ -1,5 +1,5 @@
 import { Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { CommonModule, NgOptimizedImage } from '@angular/common';
+import { AsyncPipe, NgOptimizedImage } from '@angular/common';
 import { ValueAccessorDirective } from "../custom-control.accessor";
 import { register } from 'swiper/element/bundle';
 import { Kid, KidService } from "@hh/shared";
@@ -9,7 +9,7 @@ register();
 @Component({
   selector: 'hh-kids-select-kid',
   standalone: true,
-  imports: [CommonModule, NgOptimizedImage],
+  imports: [AsyncPipe, NgOptimizedImage],
   templateUrl: './select-kid.component.html',
   styleUrls: ['./select-kid.component.scss'],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

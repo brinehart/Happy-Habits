@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { IonicModule } from '@ionic/angular';
-import { RouterModule } from '@angular/router';
+import { AsyncPipe } from '@angular/common';
+import { RouterLink } from '@angular/router';
 import { HeaderComponent, KidService } from '@hh/shared';
 import { KidCardComponent } from './kid-card/kid-card.component';
+import { IonButton, IonIcon } from "@ionic/angular/standalone";
 
 @Component({
   selector: 'hh-kids-manage',
@@ -11,11 +11,12 @@ import { KidCardComponent } from './kid-card/kid-card.component';
   templateUrl: './manage.component.html',
   styleUrls: ['./manage.component.scss'],
   imports: [
-    CommonModule,
-    RouterModule,
-    IonicModule,
+    AsyncPipe,
     KidCardComponent,
     HeaderComponent,
+    IonButton,
+    IonIcon,
+    RouterLink
   ],
 })
 export class ManageKidsComponent {

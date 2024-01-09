@@ -1,14 +1,14 @@
 import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { Kid } from '@hh/shared';
-import { IonicModule } from '@ionic/angular';
+import { IonAvatar, IonCard, IonCardHeader, IonCardSubtitle, IonCardTitle } from "@ionic/angular/standalone";
 
 @Component({
   selector: 'hh-kids-card',
   templateUrl: './kid-card.component.html',
   styleUrls: ['./kid-card.component.scss'],
   standalone: true,
-  imports: [IonicModule],
+  imports: [IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle, IonAvatar],
 })
 export class KidCardComponent {
   @Input() kid: Kid | undefined = {

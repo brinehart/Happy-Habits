@@ -1,7 +1,0 @@
-{
-  "name": "happy-habits",
-  "integrations": {
-    "capacitor": {}
-  },
-  "type": "angular"
-}

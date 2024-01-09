@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { IonItemGroup, IonItemDivider, IonLabel } from '@ionic/angular/standalone'
 import { DarkModeToggleComponent } from "./dark-mode-toggle/dark-mode-toggle.component";
-import { IonicModule } from '@ionic/angular';
 import { ManageKidsButtonComponent } from "./manage-kids-button/manage-kids-button.component";
 
 @Component({
@@ -10,10 +9,11 @@ import { ManageKidsButtonComponent } from "./manage-kids-button/manage-kids-butt
     templateUrl: './settings.component.html',
     styleUrls: ['./settings.component.scss'],
     imports: [
-        CommonModule,
-        DarkModeToggleComponent,
-        IonicModule,
-        ManageKidsButtonComponent
-    ]
+      DarkModeToggleComponent,
+      IonItemGroup,
+      IonItemDivider,
+      IonLabel,
+      ManageKidsButtonComponent
+  ]
 })
 export class SettingsComponent {}

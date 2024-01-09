@@ -1,14 +1,15 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { IonicModule } from '@ionic/angular';
+import { AsyncPipe } from '@angular/common';
+
 import { filter, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { NavigationEnd, Router } from '@angular/router';
+import { IonAvatar, IonButtons, IonHeader, IonIcon, IonTitle, IonToolbar } from "@ionic/angular/standalone";
 
 @Component({
   selector: 'hh-header',
   standalone: true,
-  imports: [CommonModule, IonicModule],
+  imports: [AsyncPipe, IonHeader, IonToolbar, IonButtons, IonIcon, IonTitle, IonAvatar],
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
