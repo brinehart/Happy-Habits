@@ -9,7 +9,6 @@ import {
 } from '@angular/core';
 import { NgOptimizedImage } from '@angular/common';
 import { register } from 'swiper/element/bundle';
-import { IonicModule } from "@ionic/angular";
 import { ValueAccessorDirective } from "../../custom-control.accessor";
 import { takeUntilDestroyed, toObservable } from "@angular/core/rxjs-interop";
 import { distinctUntilChanged, tap } from "rxjs/operators";
@@ -21,7 +20,7 @@ register();
 @Component({
   selector: 'hh-kids-kid-avatar-select',
   standalone: true,
-  imports: [IonicModule, NgOptimizedImage],
+  imports: [NgOptimizedImage],
   templateUrl: './kid-avatar-select.component.html',
   styleUrls: ['./kid-avatar-select.component.scss'],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

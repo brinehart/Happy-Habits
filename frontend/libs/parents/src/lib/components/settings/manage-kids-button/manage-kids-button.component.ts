@@ -1,12 +1,11 @@
 import { Component } from '@angular/core';
-
-import { IonicModule } from '@ionic/angular';
 import { RouterModule } from '@angular/router';
+import { IonItem, IonLabel, IonNote, IonButton } from "@ionic/angular/standalone";
 
 @Component({
   selector: 'hh-parents-manage-kids-button',
   standalone: true,
-  imports: [IonicModule, RouterModule],
+  imports: [ RouterModule, IonItem, IonLabel, IonNote, IonButton],
   templateUrl: './manage-kids-button.component.html',
   styleUrls: ['./manage-kids-button.component.scss'],
 })

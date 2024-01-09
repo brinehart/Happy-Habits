@@ -2,7 +2,7 @@ import { importProvidersFrom, isDevMode } from '@angular/core';
 import { provideRouter, RouteReuseStrategy } from '@angular/router';
 import { AppComponent } from './app/app.component';
 import { BrowserModule, bootstrapApplication } from '@angular/platform-browser';
-import { IonicRouteStrategy, IonicModule } from '@ionic/angular';
+import { IonicRouteStrategy } from '@ionic/angular';
 import { IonicStorageModule } from '@ionic/storage-angular';
 import { Drivers } from '@ionic/storage';
 import { appRoutes } from './app/app.routes';
@@ -18,16 +18,17 @@ import {
   activitiesFeature,
   RouterEffects,
 } from '@hh/shared';
+import { provideIonicAngular } from "@ionic/angular/standalone";
 
 bootstrapApplication(AppComponent, {
   providers: [
+    provideIonicAngular(),
     importProvidersFrom(
       BrowserModule,
       StoreModule.forRoot({}),
       StoreModule.forFeature(kidsFeature),
       StoreModule.forFeature(activitiesFeature),
       StoreModule.forFeature(outcomesFeature),
-      IonicModule.forRoot(),
       IonicStorageModule.forRoot({
         name: '__hhDb',
         driverOrder: [Drivers.IndexedDB, Drivers.LocalStorage],

@@ -1,13 +1,13 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-
 import { HeaderComponent } from '@hh/shared';
-import { IonicModule } from '@ionic/angular';
+import { IonContent, IonRouterOutlet } from "@ionic/angular/standalone";
 
 @Component({
   selector: 'hh-parents-home',
   standalone: true,
   imports: [
-    IonicModule,
+    IonContent,
+    IonRouterOutlet,
     HeaderComponent
 ],
   templateUrl: './parents-page.component.html',

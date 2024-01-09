@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
-
+import { IonItemGroup, IonItemDivider, IonLabel } from '@ionic/angular/standalone'
 import { DarkModeToggleComponent } from "./dark-mode-toggle/dark-mode-toggle.component";
-import { IonicModule } from '@ionic/angular';
 import { ManageKidsButtonComponent } from "./manage-kids-button/manage-kids-button.component";
 
 @Component({
@@ -11,7 +10,9 @@ import { ManageKidsButtonComponent } from "./manage-kids-button/manage-kids-butt
     styleUrls: ['./settings.component.scss'],
     imports: [
       DarkModeToggleComponent,
-      IonicModule,
+      IonItemGroup,
+      IonItemDivider,
+      IonLabel,
       ManageKidsButtonComponent
   ]
 })

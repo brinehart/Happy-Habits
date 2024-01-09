@@ -1,6 +1,5 @@
 import { Component, OnDestroy, OnInit, signal, ViewChild } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { IonModal, IonicModule } from '@ionic/angular';
+import { AsyncPipe } from '@angular/common';
 import {
   FormControl,
   FormGroup,
@@ -14,11 +13,12 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, filter, map, switchMap, take, tap } from 'rxjs';
 import { KidAvatarSelectComponent } from "../manage/kid-avatar-select/kid-avatar-select.component";
 import { Avatar, Gender } from "../../models";
+import { IonDatetimeButton, IonIcon, IonInput, IonLabel, IonToggle, IonModal, IonDatetime, IonButton } from "@ionic/angular/standalone";
 
 @Component({
   selector: 'hh-kids-manage-form',
   standalone: true,
-  imports: [CommonModule, IonicModule, ReactiveFormsModule, FormsModule, KidAvatarSelectComponent],
+  imports: [AsyncPipe,IonToggle, IonIcon, IonLabel, IonInput, IonDatetimeButton, IonModal, IonDatetime, IonButton, ReactiveFormsModule, FormsModule, KidAvatarSelectComponent],
   templateUrl: './manage-kid-form.component.html',
   styleUrls: ['./manage-kid-form.component.scss'],
 })
@@ -94,12 +94,12 @@ export class ManageKidFormComponent implements OnInit, OnDestroy {
       .subscribe();
   }
 
-  onSubmit() {
+  async onSubmit() {
     if (this.manageKidForm.invalid) {
       return;
     }
     this.kidService.upsertKid(this.getKid());
-    this.router.navigate(['/manage-kids']);
+    await this.router.navigate(['/manage-kids']);
   }
 
   ngOnDestroy(): void {

@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 
-import { IonicModule } from '@ionic/angular';
 import { Activity, HeaderComponent, Kid } from '@hh/shared';
 import { RouterLink } from '@angular/router';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from "@angular/forms";
@@ -9,7 +8,7 @@ import { SelectKidComponent } from "./select-kid.component";
 @Component({
   selector: 'hh-kids-list',
   standalone: true,
-  imports: [IonicModule, HeaderComponent, RouterLink, ReactiveFormsModule, FormsModule, SelectKidComponent],
+  imports: [HeaderComponent, RouterLink, ReactiveFormsModule, FormsModule, SelectKidComponent],
   templateUrl: './list-kids.component.html',
   styleUrls: ['./list-kids.component.scss'],
 })

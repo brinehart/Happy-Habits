@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
-
-import { IonicModule, ToggleCustomEvent } from '@ionic/angular';
+import { IonItem, IonLabel, IonNote, IonToggle } from '@ionic/angular/standalone';
+import { ToggleCustomEvent } from '@ionic/angular';
 import { DarkModeService } from '@hh/shared';
 
 @Component({
   selector: 'hh-parents-dark-mode-toggle',
   standalone: true,
-  imports: [IonicModule],
+  imports: [IonItem, IonLabel, IonNote, IonToggle],
   templateUrl: './dark-mode-toggle.component.html',
   styleUrls: ['./dark-mode-toggle.component.scss'],
 })
