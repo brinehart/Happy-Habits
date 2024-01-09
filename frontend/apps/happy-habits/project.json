@@ -7,21 +7,16 @@
   "tags": [],
   "targets": {
     "build": {
-      "executor": "@angular-devkit/build-angular:browser",
+      "executor": "@angular-devkit/build-angular:application",
       "outputs": ["{options.outputPath}"],
       "options": {
         "outputPath": "dist/apps/happy-habits",
         "index": "apps/happy-habits/src/index.html",
-        "main": "apps/happy-habits/src/main.ts",
+        "browser": "apps/happy-habits/src/main.ts",
         "polyfills": ["zone.js"],
         "tsConfig": "apps/happy-habits/tsconfig.app.json",
         "assets": [
-          "apps/happy-habits/src/assets",
-          {
-            "glob": "**/*.svg",
-            "input": "node_modules/ionicons/dist/ionicons/svg",
-            "output": "./svg"
-          }
+          "apps/happy-habits/src/assets"
         ],
         "styles": [
           "apps/happy-habits/src/styles.scss",
@@ -47,9 +42,7 @@
           "outputHashing": "all"
         },
         "development": {
-          "buildOptimizer": false,
           "optimization": false,
-          "vendorChunk": true,
           "extractLicenses": false,
           "sourceMap": true,
           "namedChunks": true

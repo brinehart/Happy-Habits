@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { AsyncPipe } from '@angular/common';
+import { RouterLink } from '@angular/router';
 import { HeaderComponent, KidService } from '@hh/shared';
 import { KidCardComponent } from './kid-card/kid-card.component';
 import { IonButton, IonIcon } from "@ionic/angular/standalone";
@@ -11,12 +11,12 @@ import { IonButton, IonIcon } from "@ionic/angular/standalone";
   templateUrl: './manage.component.html',
   styleUrls: ['./manage.component.scss'],
   imports: [
-    CommonModule,
-    RouterModule,
+    AsyncPipe,
     KidCardComponent,
     HeaderComponent,
     IonButton,
-    IonIcon
+    IonIcon,
+    RouterLink
   ],
 })
 export class ManageKidsComponent {

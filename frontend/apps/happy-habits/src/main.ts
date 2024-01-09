@@ -24,7 +24,6 @@ bootstrapApplication(AppComponent, {
   providers: [
     provideIonicAngular(),
     importProvidersFrom(
-      BrowserModule,
       StoreModule.forRoot({}),
       StoreModule.forFeature(kidsFeature),
       StoreModule.forFeature(activitiesFeature),
