@@ -7,7 +7,7 @@ import {
   signal,
   ViewChild
 } from '@angular/core';
-import { CommonModule, NgOptimizedImage } from '@angular/common';
+import { NgOptimizedImage } from '@angular/common';
 import { register } from 'swiper/element/bundle';
 import { IonicModule } from "@ionic/angular";
 import { ValueAccessorDirective } from "../../custom-control.accessor";
@@ -21,7 +21,7 @@ register();
 @Component({
   selector: 'hh-kids-kid-avatar-select',
   standalone: true,
-  imports: [CommonModule, IonicModule, NgOptimizedImage],
+  imports: [IonicModule, NgOptimizedImage],
   templateUrl: './kid-avatar-select.component.html',
   styleUrls: ['./kid-avatar-select.component.scss'],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

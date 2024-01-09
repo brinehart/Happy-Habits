@@ -46,7 +46,9 @@
   <ion-button type="submit" [disabled]="!manageKidForm.valid">
     Submit
   </ion-button>
-  <ion-button type="button" color="danger" (click)="deleteKid()" *ngIf="(mode$ | async) === 'Edit'">
-    Delete
-  </ion-button>
+  @if ((mode$ | async) === 'Edit') {
+    <ion-button type="button" color="danger" (click)="deleteKid()">
+      Delete
+    </ion-button>
+  }
 </form>

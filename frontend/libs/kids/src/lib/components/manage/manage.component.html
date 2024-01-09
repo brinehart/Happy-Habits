@@ -1,16 +1,16 @@
 <h1>Manage Your Kids</h1>
-<ng-container *ngIf="kidService.anyKids$ | async; else noKids">
-  <hh-kids-card
-    *ngFor="let kid of kidService.kids$ | async"
-    [kid]="kid"
-  ></hh-kids-card>
-</ng-container>
-<ng-template #noKids>
+@if (kidService.anyKids$ | async) {
+  @for (kid of kidService.kids$ | async; track kid) {
+    <hh-kids-card
+      [kid]="kid"
+    ></hh-kids-card>
+  }
+} @else {
   <div class="no-kids">
     <p>You don't have any kids yet.</p>
     <p>Click the button below to add a kid.</p>
   </div>
-</ng-template>
+}
 <div class="add-kid-button-section">
   <ion-button expand="block" [routerLink]="'/manage-kids/add'">
     <ion-icon name="add-sharp"></ion-icon>
