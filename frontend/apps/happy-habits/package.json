@@ -1,7 +1,7 @@
 {
   "name": "happy-habits",
   "devDependencies": {
-    "@capacitor/cli": "^5.2.2",
+    "@capacitor/cli": "../../node_modules/@capacitor/cli",
     "@capacitor/ios": "../../node_modules/@capacitor/ios",
     "@capacitor/android": "../../node_modules/@capacitor/android"
   }
