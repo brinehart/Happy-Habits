@@ -41,13 +41,13 @@ export class KidAvatarSelectComponent implements AfterViewInit {
 
   $selectedGender = signal<Gender>('Boy')
   $selectedIndex = signal<number>(0);
-  $selectedAvatar = computed<Avatar>(() =>
+  selectedAvatar = computed<Avatar>(() =>
     this.$selectedGender() === 'Boy' ?
       this.boyAvatars[this.$selectedIndex()] :
       this.girlAvatars[this.$selectedIndex()]
   );
   $avatarChanged = effect(() => {
-    this.valueAccessor.valueChange(this.$selectedAvatar());
+    this.valueAccessor.valueChange(this.selectedAvatar());
     this.valueAccessor.touchedChange(true);
   });
 

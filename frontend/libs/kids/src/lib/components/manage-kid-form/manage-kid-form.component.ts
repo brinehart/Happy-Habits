@@ -22,10 +22,10 @@ import { IonDatetimeButton, IonIcon, IonInput, IonLabel, IonToggle, IonModal, Io
   templateUrl: './manage-kid-form.component.html',
   styleUrls: ['./manage-kid-form.component.scss'],
 })
-export class ManageKidFormComponent implements OnInit, OnDestroy {
+export class ManageKidFormComponent implements OnInit {
   @ViewChild(IonModal) modal!: IonModal;
-  selectedGender: Gender | undefined = 'Boy';
-  selectedIndex: number | undefined;
+  selectedGender = signal<Gender>('Boy');
+  selectedIndex = signal(0);
 
   manageKidForm = new FormGroup({
     id: new FormControl<string | undefined>(undefined),
@@ -76,8 +76,6 @@ export class ManageKidFormComponent implements OnInit, OnDestroy {
                 filter((kid): kid is Kid => kid !== undefined),
                 take(1),
                 tap((kid) => {
-                  this.selectedGender = kid?.avatar?.gender;
-                  this.selectedIndex = kid?.avatar?.index;
                   this.manageKidForm.setValue({
                     id: kid?.id ?? null,
                     name: kid?.name ?? null,
@@ -86,6 +84,12 @@ export class ManageKidFormComponent implements OnInit, OnDestroy {
                     avatar: kid?.avatar ?? null,
                   });
                 }),
+                map((kid) => kid.avatar),
+                filter((avatar): avatar is Avatar => avatar !== undefined),
+                tap((avatar) => {
+                  this.selectedGender.set(avatar.gender);
+                  this.selectedIndex.set(avatar.index);
+                })
               ),
             ),
           ),
@@ -98,12 +102,9 @@ export class ManageKidFormComponent implements OnInit, OnDestroy {
     if (this.manageKidForm.invalid) {
       return;
     }
-    this.kidService.upsertKid(this.getKid());
+    const kid = this.getKid();
+    this.kidService.upsertKid(kid);
     await this.router.navigate(['/manage-kids']);
-  }
-
-  ngOnDestroy(): void {
-    this.manageKidForm.reset();
   }
 
   private getKid(): Kid {
@@ -116,7 +117,7 @@ export class ManageKidFormComponent implements OnInit, OnDestroy {
   }
 
   toggleGender() {
-    this.selectedGender = this.selectedGender === 'Boy' ? 'Girl' : 'Boy';
+    this.selectedGender.set(this.selectedGender() === 'Boy' ? 'Girl' : 'Boy');
   }
 
   toggleBirthdayModal(isOpen: boolean) {
